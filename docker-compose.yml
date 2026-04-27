@@ -11,10 +11,6 @@ services:
       - "traefik.http.routers.e-skupka.rule=Host(`e-skupka.uz`) || Host(`www.e-skupka.uz`)"
       - "traefik.http.routers.e-skupka.entrypoints=websecure"
       - "traefik.http.routers.e-skupka.tls.certresolver=le"
-      # IP fallback (temporary)
-      - "traefik.http.routers.e-skupka-ip.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.e-skupka-ip.entrypoints=web"
-      - "traefik.http.routers.e-skupka-ip.priority=1"
       # HTTP → redirect to HTTPS
       - "traefik.http.routers.e-skupka-http.rule=Host(`e-skupka.uz`) || Host(`www.e-skupka.uz`)"
       - "traefik.http.routers.e-skupka-http.entrypoints=web"
