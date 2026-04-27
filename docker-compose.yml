@@ -1,0 +1,23 @@
+services:
+  e-skupka:
+    build: .
+    container_name: e-skupka
+    restart: unless-stopped
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      # HTTPS
+      - "traefik.http.routers.e-skupka.rule=Host(`e-skupka.uz`) || Host(`www.e-skupka.uz`)"
+      - "traefik.http.routers.e-skupka.entrypoints=websecure"
+      - "traefik.http.routers.e-skupka.tls.certresolver=le"
+      # HTTP → redirect to HTTPS
+      - "traefik.http.routers.e-skupka-http.rule=Host(`e-skupka.uz`) || Host(`www.e-skupka.uz`)"
+      - "traefik.http.routers.e-skupka-http.entrypoints=web"
+      - "traefik.http.routers.e-skupka-http.middlewares=e-skupka-https@docker"
+      - "traefik.http.middlewares.e-skupka-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.e-skupka-https.redirectscheme.permanent=true"
+
+networks:
+  traefik-net:
+    external: true

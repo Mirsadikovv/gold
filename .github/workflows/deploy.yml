@@ -1,0 +1,14 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull and restart
+        run: |
+          git -C /opt/e-skupka pull origin main
+          docker compose -f /opt/e-skupka/docker-compose.yml up --build -d
