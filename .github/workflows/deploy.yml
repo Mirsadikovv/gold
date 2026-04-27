@@ -8,7 +8,5 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Pull and restart
-        run: |
-          git -C /opt/e-skupka pull origin main
-          docker compose -f /opt/e-skupka/docker-compose.yml up --build -d
+      - uses: actions/checkout@v4
+      - run: docker compose up --build -d
