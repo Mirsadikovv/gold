@@ -103,3 +103,4 @@ const CONFIG = {
     paymentAccepted: "Cash",
   },
 };
+
