@@ -3,8 +3,7 @@ name: Deploy skoopka.uz
 on:
   push:
     branches: [main]
-    paths:
-      - 'skoopka/**'
+  workflow_dispatch:
 
 jobs:
   deploy:

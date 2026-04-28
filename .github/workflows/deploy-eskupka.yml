@@ -3,8 +3,7 @@ name: Deploy e-skupka.uz
 on:
   push:
     branches: [main]
-    paths:
-      - 'eskupka/**'
+  workflow_dispatch:
 
 jobs:
   deploy:
