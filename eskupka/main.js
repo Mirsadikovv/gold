@@ -1,5 +1,5 @@
 /* ===== LANGUAGE ===== */
-let lang = localStorage.getItem('gold_lang') || 'ru';
+let lang = localStorage.getItem('eskupka_lang') || 'ru';
 
 function t(key) {
   const parts = key.split('.');
@@ -24,7 +24,7 @@ function applyLang() {
 
 document.getElementById('langToggle').addEventListener('click', () => {
   lang = lang === 'ru' ? 'uz' : 'ru';
-  localStorage.setItem('gold_lang', lang);
+  localStorage.setItem('eskupka_lang', lang);
   applyLang();
 });
 
@@ -79,8 +79,8 @@ function populateDynamic() {
   const footerCopy = document.getElementById('footerCopy');
   if (footerCopy) {
     footerCopy.textContent = lang === 'ru'
-      ? `© ${new Date().getFullYear()} GOLD. Все права защищены.`
-      : `© ${new Date().getFullYear()} GOLD. Barcha huquqlar himoyalangan.`;
+      ? `© ${new Date().getFullYear()} E-Skupka. Все права защищены.`
+      : `© ${new Date().getFullYear()} E-Skupka. Barcha huquqlar himoyalangan.`;
   }
 
   // Map
@@ -97,7 +97,7 @@ function renderMap() {
   if (!container) return;
 
   if (src && src.trim()) {
-    const title = lang === 'ru' ? 'Карта расположения GOLD' : 'GOLD joylashuv xaritasi';
+    const title = lang === 'ru' ? 'Карта расположения E-Skupka' : 'E-Skupka joylashuv xaritasi';
     container.innerHTML = `<iframe src="${src}" title="${title}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
   } else {
     const placeholder = document.getElementById('mapPlaceholder');

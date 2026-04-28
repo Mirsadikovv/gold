@@ -1,0 +1,23 @@
+services:
+  skoopka:
+    build: .
+    container_name: skoopka
+    restart: unless-stopped
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      # HTTPS
+      - "traefik.http.routers.skoopka.rule=Host(`skoopka.uz`) || Host(`www.skoopka.uz`)"
+      - "traefik.http.routers.skoopka.entrypoints=websecure"
+      - "traefik.http.routers.skoopka.tls.certresolver=le"
+      # HTTP → redirect to HTTPS
+      - "traefik.http.routers.skoopka-http.rule=Host(`skoopka.uz`) || Host(`www.skoopka.uz`)"
+      - "traefik.http.routers.skoopka-http.entrypoints=web"
+      - "traefik.http.routers.skoopka-http.middlewares=skoopka-https@docker"
+      - "traefik.http.middlewares.skoopka-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.skoopka-https.redirectscheme.permanent=true"
+
+networks:
+  traefik-net:
+    external: true

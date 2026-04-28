@@ -1,0 +1,14 @@
+name: Deploy skoopka.uz
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skoopka/**'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f skoopka/docker-compose.yml up --build -d
