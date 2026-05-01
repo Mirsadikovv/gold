@@ -18,7 +18,6 @@ function applyLang() {
     el.textContent = el.dataset[lang] || el.dataset.ru;
   });
   document.getElementById('langLabel').textContent = lang === 'ru' ? 'UZ' : 'RU';
-  updateMetaKeywords();
   populateDynamic();
 }
 
@@ -85,9 +84,6 @@ function populateDynamic() {
 
   // Map
   renderMap();
-
-  // JSON-LD
-  updateJsonLd();
 }
 
 /* ===== YANDEX MAP ===== */
@@ -110,49 +106,6 @@ function renderMap() {
   }
 }
 
-/* ===== JSON-LD LocalBusiness ===== */
-function updateJsonLd() {
-  const c = CONFIG;
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": c.business.name,
-    "description": c.business.description.ru,
-    "url": c.seo.siteUrl,
-    "telephone": c.contact.phoneRaw,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Ташкент",
-      "addressRegion": "Юнусабад",
-      "addressCountry": "UZ"
-    },
-    "geo": {
-      "@type": "GeoCoordinates"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        "opens": c.hours.weekdays.time.split('–')[0].trim(),
-        "closes": c.hours.weekdays.time.split('–')[1].trim()
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Sunday"],
-        "opens": c.hours.weekend.time.split('–')[0].trim(),
-        "closes": c.hours.weekend.time.split('–')[1].trim()
-      }
-    ],
-    "priceRange": c.jsonLd.priceRange,
-    "currenciesAccepted": c.jsonLd.currenciesAccepted,
-    "paymentAccepted": c.jsonLd.paymentAccepted,
-    "sameAs": [c.contact.telegramUrl]
-  };
-
-  const el = document.getElementById('json-ld-local');
-  if (el) el.textContent = JSON.stringify(schema);
-}
-
 /* ===== BURGER MENU ===== */
 const burger = document.getElementById('burger');
 const mobileNav = document.getElementById('mobileNav');
@@ -173,12 +126,5 @@ window.addEventListener('scroll', () => {
     : 'none';
 }, { passive: true });
 
-/* ===== UPDATE META KEYWORDS BY LANG ===== */
-function updateMetaKeywords() {
-  const meta = document.querySelector('meta[name="keywords"]');
-  if (meta) meta.setAttribute('content', CONFIG.seo.keywords[lang] || CONFIG.seo.keywords.ru);
-}
-
 /* ===== INIT ===== */
-updateMetaKeywords();
 applyLang();

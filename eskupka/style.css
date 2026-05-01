@@ -224,11 +224,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 
 .hero__title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(5rem, 18vw, 12rem);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.15;
   color: var(--gold-light);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   margin-bottom: 24px;
   text-shadow:
     0 0 80px rgba(201, 168, 76, 0.4),
